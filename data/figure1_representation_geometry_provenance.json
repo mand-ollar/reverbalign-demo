@@ -1,0 +1,74 @@
+{
+  "models": {
+    "raw": "Raw CLAP",
+    "reverbalign": "ReverbAlign"
+  },
+  "test_points": 750,
+  "rirs": 25,
+  "speakers": 3,
+  "dimensions": 512,
+  "pair_counts": {
+    "same_rir_different_speech": 10875,
+    "different_rir_same_speech": 9000,
+    "different_rir_different_speech": 261000
+  },
+  "total_unordered_pairs_per_model": 280875,
+  "pairs_exhaustive": true,
+  "distance": "1-dot of L2-normalized512D embeddings; float64 accumulation",
+  "speech_definition": "utterance ID, not speaker ID",
+  "ecdf": "Every pair used; exact ECDF evaluated on a shared3001point grid plus observed minima/maxima/medians for vector display",
+  "medians": "Explicit symbols; no significance testing or independence assumption for paired observations",
+  "umap": {
+    "n_components": 2,
+    "n_neighbors": 20,
+    "min_dist": 0.1,
+    "spread": 1.0,
+    "metric": "cosine",
+    "init": "spectral",
+    "n_epochs": 500,
+    "random_state": 42,
+    "transform_seed": 42,
+    "n_jobs": 1
+  },
+  "umap_fit_points": 750,
+  "centroids_displayed": false,
+  "umap_coordinates_reused": true,
+  "speaker_markers": {
+    "174": "o",
+    "2086": "^",
+    "2412": "s"
+  },
+  "inputs": {
+    "raw": {
+      "file": "experiments/52_01199_output512/results/raw_test.npz",
+      "sha256": "8294537b5b6fe1c1bef0fe2a24f9f341a03d332630473ce9c49de9111518634e"
+    },
+    "reverbalign": {
+      "file": "experiments/52_01199_output512/results/01199_512_test.npz",
+      "sha256": "6036f09e5e5e828801707bfb230f87022e5592d06f56162b15262b5892035d65"
+    }
+  },
+  "layout_audits": {
+    "figure1_representation_geometry": {
+      "all_visible_text_inside_page": true,
+      "minimum_text_margin_pt": 2
+    }
+  },
+  "pdf_fonttype": 42,
+  "pdf_vector": true,
+  "png_dpi": 600,
+  "quality_checks": {
+    "pdf_render_visually_reviewed": true,
+    "centroid_symbols_and_legend_removed": true,
+    "three_speaker_markers_retained": true,
+    "pdf_raster_images": 0,
+    "fonts_embedded": true,
+    "no_cropped_labels": true
+  },
+  "dimensions_mm": {
+    "figure1": [
+      178,
+      90
+    ]
+  }
+}

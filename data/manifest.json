@@ -1,0 +1,2416 @@
+{
+  "model": "ReverbAlign-512-v1",
+  "selection_policy": "Include every one of the 25 held-out RIRs once, sorted by room ID and RIR ID. Retain the previous speaker-to-RIR assignments: anchor RIRs nearest each room-median reference RT60 (distance rounded to 12 decimal places; ties: RIR ID) receive sorted speaker IDs in room-order rotation. Assign remaining RIRs to the speaker with the fewest examples so far (ties: numeric speaker ID), starting from the six anchors. In displayed RIR order, assign each speaker's next unused lexicographically sorted test utterance, starting at index 0. All 25 utterances are distinct. Speakers 174, 2086, and 2412 have 9, 8, and 8 examples respectively, selected from their 10 test utterances each. No output metric or listening judgment is used. Aggregate statistics continue to use all 750 test pairs.",
+  "evaluation": {
+    "pairs": 750,
+    "rirs": 25,
+    "utterances": 30,
+    "speakers": 3,
+    "rooms": 6,
+    "updates": 300,
+    "stage": "final",
+    "hamilton_16s_excluded": true,
+    "caption_combinations": 96,
+    "caption_levels": [
+      4,
+      4,
+      2,
+      3
+    ],
+    "free_form_input": false
+  },
+  "audio_policy": "Saved final FDN checkpoints rendered with the audited CPU float32 renderer; no optimization or CLAP inference. L2 RIR normalization; dry convolved then capped at 10s. Reference from stored convolution HDF5. All four tracks share one peak-safety gain per case (maximum 0.95); mono 16-kHz PCM16. No per-track loudness normalization.",
+  "bucket_edges": {
+    "rt60_s": [
+      0.7960456615507194,
+      1.3253329271156815,
+      1.7378000647122165
+    ],
+    "c50_db": [
+      -0.9820277046175072,
+      3.6056298930778503,
+      8.08660759653073
+    ],
+    "drr_db": [
+      -5.280715555549172
+    ],
+    "edt_s": [
+      0.6035252777465081,
+      1.317819366163118
+    ]
+  },
+  "registration": {
+    "id": "reverbalign-512-v1",
+    "name": "ReverbAlign-512-v1",
+    "status": "named_candidate",
+    "date_named": "2026-11-07",
+    "audio": {
+      "checkpoint": "experiments/52_01199_output512/results/audio_512.pt",
+      "sha256": "22cd0719ff7baac2af7910af11bc4f31994312783476963f2b41947bd9ad1c02",
+      "dimension": 512,
+      "architecture": "512→1024→LayerNorm→GELU→1024→LayerNorm→GELU→512→L2",
+      "source": "01199 output512 controlled replication",
+      "spec": "experiments/52_01199_output512/SPEC.md",
+      "checkpoint_relative": "experiments/52_01199_output512/results/audio_512.pt",
+      "size_bytes": 8429347,
+      "spec_relative": "experiments/52_01199_output512/SPEC.md"
+    },
+    "text": {
+      "checkpoint": "experiments/53_text_512_architectures/results/text_original_structure_text.pt",
+      "sha256": "b6e02c9b4d636350e93e66b1bc83ac896d39479ed19f15ab7b9e705524817cd3",
+      "dimension": 512,
+      "architecture": "512→512→GELU→512→L2",
+      "selected_step": 500,
+      "spec": "experiments/53_text_512_architectures/SPEC.md",
+      "checkpoint_relative": "experiments/53_text_512_architectures/results/text_original_structure_text.pt",
+      "size_bytes": 2104239,
+      "spec_relative": "experiments/53_text_512_architectures/SPEC.md"
+    },
+    "training_label_version": "exact-zero-tail-trim recomputed labels; test25 exclusion",
+    "caption_buckets": "experiments/53_text_512_architectures/results/caption_buckets.json",
+    "caption_assignments": "experiments/53_text_512_architectures/results/corrected_caption_assignments.csv",
+    "comparison_reference": "legacy-best",
+    "global_current_best_pointer": "unchanged",
+    "caption_buckets_relative": "experiments/53_text_512_architectures/results/caption_buckets.json",
+    "caption_assignments_relative": "experiments/53_text_512_architectures/results/corrected_caption_assignments.csv"
+  },
+  "examples": [
+    {
+      "number": 1,
+      "title": "BUT CR2",
+      "job": "pair_0000",
+      "folder": "pair_000000",
+      "rir_id": "BUT__CR2__SpkID01_20170906_S__IR_sweep_15s_45Hzto22kHz_FS16kHz.v00",
+      "room": "BUT/CR2",
+      "speech_id": "174/168635/174-168635-0001",
+      "speaker": "174",
+      "caption_id": "formal_055",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a long tail. The speech sounds slightly muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.6355724877468856,
+          "c50_db": 1.6391642368135444,
+          "drr_db": -9.602912455441018,
+          "edt_s": 1.0969912152395367
+        },
+        "raw-clap": {
+          "rt60_s": 1.3777832421780907,
+          "c50_db": 6.51863245671003,
+          "drr_db": 1.7780199280168767,
+          "edt_s": 1.5093198408037478
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.0331463223317527,
+          "c50_db": 6.124406274324507,
+          "drr_db": 0.5315463332445688,
+          "edt_s": 0.7771347007989282
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 1
+      },
+      "room_median_rt60": 1.6401122552016196,
+      "common_listening_gain": 0.4805807027116474,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0000_dry.wav",
+          "sha256": "06064bf7bc576533a2172cf48fb62cb1c61b47c585db6dc2144413f482a8c548",
+          "samples": 74400,
+          "seconds": 4.65,
+          "source_float32_sha256": "cafd646ae3ecf29083ea63bacff239130d409c511f4c83a36770b23338e0b989"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0000_reference.wav",
+          "sha256": "08cf29ed3e4ebf62bd823778ec542cb309c562e7a69aa67b09cb384f90c792ae",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "6a6f5843c6596ce9564146dea9dece2bf25241493088aa92e8839b315c6d43bb"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0000_raw-clap.wav",
+          "sha256": "972c031a0b916edd6baa0c4a403bcc9a0826bc61fae0c446c3d62fcea12baa50",
+          "samples": 97599,
+          "seconds": 6.0999375,
+          "source_float32_sha256": "676e87737929d342ac4069b8178e39bf518214a6c1ecb61543951d4530da07c4"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0000_reverbalign-512-v1.wav",
+          "sha256": "98c32e036a375f5d12ac3305b97478b8fafe0c3aed8bed7400897155dfe183dd",
+          "samples": 93599,
+          "seconds": 5.8499375,
+          "source_float32_sha256": "81b0dd58db4b4c7985c0bb85881b730e59b14e9ac086167fbe6e6e1fec4f9dae"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 170,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 62970,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000000/final_checkpoint.pt",
+            "sha256": "173380f7ba616aa701f1ed93df14f60bcba39920c242a4cca719bb9262f9b029",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 23200,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000000/final_checkpoint.pt",
+            "sha256": "4e61d7813e7c999dc8e6190460f34ab30295929a2347243c47b10d8220e13b1d",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 19200,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 2,
+      "title": "BUT CR2",
+      "job": "pair_0031",
+      "folder": "pair_000031",
+      "rir_id": "BUT__CR2__SpkID02_20170906_S__IR_sweep_15s_45Hzto22kHz_FS16kHz.v00",
+      "room": "BUT/CR2",
+      "speech_id": "174/168635/174-168635-0012",
+      "speaker": "174",
+      "caption_id": "formal_055",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a long tail. The speech sounds slightly muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.620833358588781,
+          "c50_db": 1.6472433445001209,
+          "drr_db": -6.696144212808508,
+          "edt_s": 1.0967963507907554
+        },
+        "raw-clap": {
+          "rt60_s": 1.498339222123744,
+          "c50_db": 4.4753792300637665,
+          "drr_db": 2.999945267759096,
+          "edt_s": 2.664146548570575
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.145630267480885,
+          "c50_db": -0.41281804447945325,
+          "drr_db": -7.1055612364386285,
+          "edt_s": 1.1501564038282843
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 3
+      },
+      "room_median_rt60": 1.6401122552016196,
+      "common_listening_gain": 0.748226051807373,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0031_dry.wav",
+          "sha256": "6bdb8395e380c4600217cd86ec0c1d70abbe919224b0c095b2dc67769493936d",
+          "samples": 133760,
+          "seconds": 8.36,
+          "source_float32_sha256": "58caccc2ab022df330a3dde8d2316cc15df16fff3f8f0e034f7cadd929cf74ed"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0031_reference.wav",
+          "sha256": "53cf2437a7959f7d9f12b7f5e52a45ea6980e5590980355942f904d6689194a6",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "015fc26bd738d959e971c7ffbba698512089e28e88c7991c20a37054ecf843e6"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0031_raw-clap.wav",
+          "sha256": "3b39ab6e08f948a39d182c3b22b39aae1998bca42d9c9d15c129ccf89ece415a",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "7d3e2444426b8c10044800623ff4dbcc27acf5b13d709f57561f03a40b49b5c7"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0031_reverbalign-512-v1.wav",
+          "sha256": "12b57ede3c77e3c3acd4c36db2b080a3ddf177f0e4cb17af69b3739544a6a9cf",
+          "samples": 156827,
+          "seconds": 9.8016875,
+          "source_float32_sha256": "55a0964578299b6075ca1039f3c2e76427411ccaafc98da2e85a7b3f62e0bb21"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 171,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 63171,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000031/final_checkpoint.pt",
+            "sha256": "99ec1e1f52dc0a49f6a89d4ad111acc3f73d517002cde3c2303b6b335db924bf",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 27200,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000031/final_checkpoint.pt",
+            "sha256": "a9070825fd53c28a5da612ccdaff7f11adbb9ebb2c7ec34617b094000e614808",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 23068,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 3,
+      "title": "BUT CR2",
+      "job": "pair_0070",
+      "folder": "pair_000070",
+      "rir_id": "BUT__CR2__SpkID03_20170906_S__IR_sweep_15s_45Hzto22kHz_FS16kHz.v00",
+      "room": "BUT/CR2",
+      "speech_id": "2086/149214/2086-149214-0000",
+      "speaker": "2086",
+      "caption_id": "formal_085",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a very long tail. The speech sounds clear. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.9308789608585217,
+          "c50_db": 4.923299361911807,
+          "drr_db": -8.543391502035309,
+          "edt_s": 0.68087492567516
+        },
+        "raw-clap": {
+          "rt60_s": 1.2245250267063534,
+          "c50_db": 4.317074489654999,
+          "drr_db": 0.416786226713925,
+          "edt_s": 1.2702956123942815
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.1715214026594762,
+          "c50_db": 3.91037426950035,
+          "drr_db": -1.7258474350267337,
+          "edt_s": 0.9996617783592542
+        }
+      },
+      "matches": {
+        "raw-clap": 2,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.6401122552016196,
+      "common_listening_gain": 0.5996340726021868,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0070_dry.wav",
+          "sha256": "6399eda262ef8f170a7f65cc8beadd939f962fa207c0838b72b6fb7b80ca60c0",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "501d465abb86f5e19c53d08b76d6ba6ebf0de4d52265d5a7b2463ce9ce72e194"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0070_reference.wav",
+          "sha256": "baa2c9da74c858f163d88c5648fc53aeb01c327ca5f77892117bd80646610bc2",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "fcaa7859605659dc0fde622fa2f98ca2c4a0f99725f245a2cfb8fb509cc9c76d"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0070_raw-clap.wav",
+          "sha256": "2870a73fa14349170248fbae9792de96d9c93353e5299e06e20c45123eff1ed8",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "05f77e1cc21638d1ebce69f2c3b74196101ed5a6060a8e2e8b5ddd282aa77bf1"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0070_reverbalign-512-v1.wav",
+          "sha256": "968b2e301526b642d145e5595e00c67238ae3a7d273865dea8f44440f4fad5fa",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "b8cad35bb3568cb7a527fc8e3b12de3ca21755892528c0b60942138ba50a48bd"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 180,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 63380,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000070/final_checkpoint.pt",
+            "sha256": "f70c56bd9c1b97630ed1a06eff848b76f0947ecbada921506141f2af86a9f9f6",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 24806,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000070/final_checkpoint.pt",
+            "sha256": "3a1f1736ea789be1508fa67dcfe4cd3124f37eae9d4ef7c08548c7ba2bd26d0e",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 21600,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 4,
+      "title": "BUT CR2",
+      "job": "pair_0110",
+      "folder": "pair_000110",
+      "rir_id": "BUT__CR2__SpkID04_20170906_S__IR_sweep_15s_45Hzto22kHz_FS16kHz.v00",
+      "room": "BUT/CR2",
+      "speech_id": "2412/153947/2412-153947-0003",
+      "speaker": "2412",
+      "caption_id": "formal_061",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a long tail. The speech sounds clear. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.6446520226563537,
+          "c50_db": 5.374144315073126,
+          "drr_db": -8.777282195746777,
+          "edt_s": 0.624455771639399
+        },
+        "raw-clap": {
+          "rt60_s": 1.2726423599584968,
+          "c50_db": 8.380339375394302,
+          "drr_db": 3.0215101584935526,
+          "edt_s": 0.7300807823802448
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.9072850614879923,
+          "c50_db": 3.6333418885129487,
+          "drr_db": -5.0956440545334285,
+          "edt_s": 0.8275761018277278
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.6401122552016196,
+      "common_listening_gain": 0.579797255187902,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0110_dry.wav",
+          "sha256": "9355583a31e555aa049b1607500b5af546f2f6c4c4d9a6c504ad7bd71e89ef06",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "7cd71e7c7674350385fe3840250d5fee980b243933266a1600642830db707e00"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0110_reference.wav",
+          "sha256": "316e1ff1019278b82f2a01a8fce97b70c3e6c76b06bdbac12ea75918e2c33699",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "fa8e4ecdd5c73f075ca9a0caf3b17e6a7939e3cf0726bee6e74cc3a87c17eddf"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0110_raw-clap.wav",
+          "sha256": "3d0c99b9f6292e0f1d125c6a18c3f68b6d7b68ebcae1f790c0e33bbcccf14c20",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "37eeee291d752833d3fa3eeafd520e30e1d5ef3a2b2e7caf51990893fe3ea535"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0110_reverbalign-512-v1.wav",
+          "sha256": "049c0bfaeca1aa85586d4122fc00feb2cb7709672578e0f8e511e9dd6f4ed652",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "c7f16c9b7da88f33103e90f3f0bded00537f47394fb0a078ffc9d638450e7c20"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 190,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 63590,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000110/final_checkpoint.pt",
+            "sha256": "7c673a1cf9d43e504ce21b3751f2187b0474607f35d700b5eafc1b60e605397a",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 21600,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000110/final_checkpoint.pt",
+            "sha256": "811c65a49b7580a521f90e273ad748d0534cefc69b801ab798696de7aa6035d2",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 18723,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 5,
+      "title": "Wheldrake Wood",
+      "job": "pair_0131",
+      "folder": "pair_000131",
+      "rir_id": "OpenAIR__02_Forest-in-WheldrakeWood__S1R1_M30",
+      "room": "OpenAIR/02_Forest-in-WheldrakeWood",
+      "speech_id": "2086/149214/2086-149214-0001",
+      "speaker": "2086",
+      "caption_id": "formal_069",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a long tail. The speech sounds very clear. The voice stands out over reflected sound.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.3463398854625632,
+          "c50_db": 12.651835599148962,
+          "drr_db": 3.4995222611962715,
+          "edt_s": 0.2580086031799085
+        },
+        "raw-clap": {
+          "rt60_s": 1.1866336177966146,
+          "c50_db": 3.6621779867753226,
+          "drr_db": -4.414905618050264,
+          "edt_s": 1.2834390580566963
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.0766246240334116,
+          "c50_db": 14.204289406666382,
+          "drr_db": 7.170738815346725,
+          "edt_s": 0.2541194792016847
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 3
+      },
+      "room_median_rt60": 1.145631659127747,
+      "common_listening_gain": 0.37093263670860077,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0131_dry.wav",
+          "sha256": "b2351e8106ccfede0353f6a5cc3dbf88a7945fc66d706ae3a473a55d0d854866",
+          "samples": 111520,
+          "seconds": 6.97,
+          "source_float32_sha256": "7d7ebb5c59e43764ff44f9e86f7181b69328b6a28f6c9e6b693f4ce122df1727"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0131_reference.wav",
+          "sha256": "fdf305310fbd369ab4a2a0354ac9a82b1ebd9bed65d76eefdfbb9f2d8f48b0b8",
+          "samples": 143519,
+          "seconds": 8.9699375,
+          "source_float32_sha256": "54d982417ad7b45ca099b68971da6275c7cba654d8719149b603979a95da49f0"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0131_raw-clap.wav",
+          "sha256": "365af370ad449dbe49e441fc190a0403bce6e8baa6c15557af00b3578b974752",
+          "samples": 133718,
+          "seconds": 8.357375,
+          "source_float32_sha256": "d900d1d3b302d22b668f6e5436f4567e93825608aaf2f31b52a5b3cbb5ffcaa4"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0131_reverbalign-512-v1.wav",
+          "sha256": "505246c639558bbb3774a0373cd47f113bfb933d892a8d01fd3b4327eb5a33cb",
+          "samples": 129919,
+          "seconds": 8.1199375,
+          "source_float32_sha256": "e8f0ce43e2991bbdb3612b06e48de61bf762a51b3d16e62c61d188ef30d94907"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 181,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 63781,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000131/final_checkpoint.pt",
+            "sha256": "a09b17ee811276fc1e1639731e960765950c2872fcbaaff4f7b2a1515eb1bb1b",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 22199,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000131/final_checkpoint.pt",
+            "sha256": "b3db5769749174a0b2d644fbd86aebf80ea2ad56116a83b5bceda6831ef5fdcb",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 18400,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 6,
+      "title": "Wheldrake Wood",
+      "job": "pair_0152",
+      "folder": "pair_000152",
+      "rir_id": "OpenAIR__02_Forest-in-WheldrakeWood__S1R2_M30",
+      "room": "OpenAIR/02_Forest-in-WheldrakeWood",
+      "speech_id": "174/168635/174-168635-0018",
+      "speaker": "174",
+      "caption_id": "formal_069",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a long tail. The speech sounds very clear. The voice stands out over reflected sound.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.3975297237440016,
+          "c50_db": 11.802425170122483,
+          "drr_db": 2.075335836920569,
+          "edt_s": 0.2306624241979496
+        },
+        "raw-clap": {
+          "rt60_s": 1.5627453863775709,
+          "c50_db": 1.4906445100134635,
+          "drr_db": -5.6227487728875,
+          "edt_s": 1.4241874456206718
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.2120452145095,
+          "c50_db": 11.00792423264197,
+          "drr_db": 6.603252113395451,
+          "edt_s": 0.6116207808031017
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.145631659127747,
+      "common_listening_gain": 0.4325676150699746,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0152_dry.wav",
+          "sha256": "93731a86b13d76d6e8415d4487a801df630eae45e4e6972b382e17fc594a818c",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "5d32ea606ef0bdee5c39e1f78166092700b1917e4b577c3c88ab5d7797ca0f64"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0152_reference.wav",
+          "sha256": "26f0a71fd281a1d6665ed8bfbb1328d239e7bf06626bf7fd60e6ab4fb714408e",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "98780e9a87328000a35613bfc17cb333c8ce122ca6dba71ca6d26cd0c409a004"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0152_raw-clap.wav",
+          "sha256": "b0033494babd25ac9237863dbd28522b28de917b781ac16dea62cea6e6464531",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "68ee6645c710961fc9edca66bf520b87a3ff889373fc1fd23b1fa433663ccdf4"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0152_reverbalign-512-v1.wav",
+          "sha256": "d574f27453f8c8df0e4cc55c8ce4ada45db335039d7b09b6fac2e7d884f99250",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "c18c9aaae4b47a858323ae0ea0b9a3b8c428af6c337bfe2e49352a5f291c07e1"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 172,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 63972,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000152/final_checkpoint.pt",
+            "sha256": "77f6b4bde1cc839974ced605288729abb54a189578085585b4249d2328b49296",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 27413,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000152/final_checkpoint.pt",
+            "sha256": "454e66736939923a1f624ee2c3528f42be885abc59d900d7c96b29e5dba8d4be",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 20800,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 7,
+      "title": "Wheldrake Wood",
+      "job": "pair_0192",
+      "folder": "pair_000192",
+      "rir_id": "OpenAIR__02_Forest-in-WheldrakeWood__S2R1_M30",
+      "room": "OpenAIR/02_Forest-in-WheldrakeWood",
+      "speech_id": "2086/149214/2086-149214-0002",
+      "speaker": "2086",
+      "caption_id": "formal_045",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a short tail. The speech sounds very clear. The voice stands out over reflected sound.",
+      "values": {
+        "reference": {
+          "rt60_s": 0.9449234327929306,
+          "c50_db": 10.45363888750786,
+          "drr_db": -1.5615762088471288,
+          "edt_s": 0.29354143863980314
+        },
+        "raw-clap": {
+          "rt60_s": 1.4324718780686458,
+          "c50_db": 15.159473884145726,
+          "drr_db": 13.79036297490271,
+          "edt_s": 0.0002684689242481175
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.9389356087502585,
+          "c50_db": 15.434035209738447,
+          "drr_db": 7.653048942882332,
+          "edt_s": 0.3082587596975613
+        }
+      },
+      "matches": {
+        "raw-clap": 3,
+        "reverbalign-512-v1": 4
+      },
+      "room_median_rt60": 1.145631659127747,
+      "common_listening_gain": 0.21603963524625583,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0192_dry.wav",
+          "sha256": "4bf533389d06bcb1a595df9fdb8698397940311bf9c397068e6b5ee92c1f4e38",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "c25b262f39f10682d9b0b3e21224196bf79259d3203cdbb65944b85a18499110"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0192_reference.wav",
+          "sha256": "6bb6993ac8ffdb939ed761a56ae79bc9ee151eb612900c5eb2c96ad353038c86",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "01b48d9d876a539f71f6550719e471fb50c18cb7cfc2a84319c4988b964daed7"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0192_raw-clap.wav",
+          "sha256": "f011aad4b95e63f528f47ea88aac60b3d696cd2a5615882de7a1b294a394cf19",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "5d0d9f60ba4a32aa6b8dabca281fe440abd98e0da2c3fb477e5fe6fe2040f1af"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0192_reverbalign-512-v1.wav",
+          "sha256": "d4767d0800b3ce29ebacd483aacaf3960097fd26f4373883ca2b382db7f1bf2b",
+          "samples": 159999,
+          "seconds": 9.9999375,
+          "source_float32_sha256": "636ba6494f75bf293d271f0e7a826245e9a5f3d1f8b5dd223b66a597946fc1ad"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 182,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 64182,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000192/final_checkpoint.pt",
+            "sha256": "7f3b149cacc2d03c26ed7ec6651dcfff746f042cdc55b9fe0ca7f8253f9c9692",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 22400,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000192/final_checkpoint.pt",
+            "sha256": "42ca6e6ab51347aa6f391736c07e899cb216c33b86becc618d95d205f92192f6",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 16000,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 8,
+      "title": "Wheldrake Wood",
+      "job": "pair_0231",
+      "folder": "pair_000231",
+      "rir_id": "OpenAIR__02_Forest-in-WheldrakeWood__S2R2_M30",
+      "room": "OpenAIR/02_Forest-in-WheldrakeWood",
+      "speech_id": "2412/153947/2412-153947-0015",
+      "speaker": "2412",
+      "caption_id": "formal_045",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a short tail. The speech sounds very clear. The voice stands out over reflected sound.",
+      "values": {
+        "reference": {
+          "rt60_s": 0.8047494682305455,
+          "c50_db": 12.341774265051718,
+          "drr_db": -0.0025973347575477734,
+          "edt_s": 0.2145559710021312
+        },
+        "raw-clap": {
+          "rt60_s": 1.495866391866475,
+          "c50_db": 1.2420459629946796,
+          "drr_db": -4.884575465720292,
+          "edt_s": 1.1665643433367445
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.9776901292201523,
+          "c50_db": 11.703678106797522,
+          "drr_db": 5.999652897667708,
+          "edt_s": 0.5796048260154384
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 4
+      },
+      "room_median_rt60": 1.145631659127747,
+      "common_listening_gain": 0.3789430117409326,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0231_dry.wav",
+          "sha256": "75fbb9594c3b3de577fab1756a7655839e645d4fed270589d7819dcb4b08de97",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "d37176b09b928296de4f8cc1177abe079f0b9f4584cb9e8a62e1200e00601c56"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0231_reference.wav",
+          "sha256": "282db7f8c083001cfd7e9474538da0ffc8e10822ca763bb5d51ccce91756260c",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "1238555d94b85695bfce6895e6f9316509ef737ca7a89a47a591354a679ccd56"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0231_raw-clap.wav",
+          "sha256": "cd527ff4f71ca93a6b2721a942b215e13f2fa5b43155a3d615d0130a96be29dd",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "06d48d1939546f0fb0fa4ca4d2f246f16e9162e149332e0ffc4c24ac636a18ec"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0231_reverbalign-512-v1.wav",
+          "sha256": "d8c9a8a6fad42c04a91b2c63581ea8e944b9b231c405e4352ee065d08d0a0004",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "bf1cfea3a696dd92fe5afc806480a0eb4c76f1adaa5bbb109b96f134fa06826e"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 191,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 64391,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000231/final_checkpoint.pt",
+            "sha256": "46cd25f9c5ad11a0b88e59e35c87ec2c5217a189abcdba2fc82a9748d2d55ba1",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 26400,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000231/final_checkpoint.pt",
+            "sha256": "0e873fbf46303eb9816b50078c9abeb3ef59d3ba48f02d55274a4ae42182e3c9",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 16985,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 9,
+      "title": "Creswell Crags · outside",
+      "job": "pair_0243",
+      "folder": "pair_000243",
+      "rir_id": "OpenAIR__07_creswell-crags__outside__1_s_mainlevel_r_mainlevel",
+      "room": "OpenAIR/07_creswell-crags/outside",
+      "speech_id": "174/168635/174-168635-0021",
+      "speaker": "174",
+      "caption_id": "formal_045",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a short tail. The speech sounds very clear. The voice stands out over reflected sound.",
+      "values": {
+        "reference": {
+          "rt60_s": 0.8966391848328005,
+          "c50_db": 8.327120827180973,
+          "drr_db": -0.8603012730132448,
+          "edt_s": 0.4204738927465238
+        },
+        "raw-clap": {
+          "rt60_s": 1.3075002855980673,
+          "c50_db": 10.92029653823011,
+          "drr_db": 7.77872368145447,
+          "edt_s": 0.33640960833101385
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.8737016243533621,
+          "c50_db": 15.157385854518704,
+          "drr_db": 8.63426309759537,
+          "edt_s": 0.6783985610313269
+        }
+      },
+      "matches": {
+        "raw-clap": 4,
+        "reverbalign-512-v1": 3
+      },
+      "room_median_rt60": 0.6743335746647554,
+      "common_listening_gain": 0.4916371479141514,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0243_dry.wav",
+          "sha256": "63dc10367b8df41a933cb284c51e914a35c968c6da350224b7ba7cb8a2e36bb5",
+          "samples": 66720,
+          "seconds": 4.17,
+          "source_float32_sha256": "1c59c7e3f3b352c81bbca137aba042854dc4b282e9a70646848e9519a6bc973b"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0243_reference.wav",
+          "sha256": "28549616da8c3ede778dfef9eeb80d3f0be924d8a1df862f1e438a1878eeecd0",
+          "samples": 82765,
+          "seconds": 5.1728125,
+          "source_float32_sha256": "99156d768859e8b4a77f19bfc3325875ec5c2b8f2fe94c33c4bc568dc62e939c"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0243_raw-clap.wav",
+          "sha256": "419f03d43f170ba554a0a651b0a15f268d51ed7d7597dfecb32c8dd27c021683",
+          "samples": 90719,
+          "seconds": 5.6699375,
+          "source_float32_sha256": "7dc43ac47608ba09473dd8b60f5a7ea8480dfd4e7d0d465081ae0c630a81864e"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0243_reverbalign-512-v1.wav",
+          "sha256": "3379caf4e1ebe59e16b1f108285d54430c2db9f51ec808909f3cefb23a09490d",
+          "samples": 81966,
+          "seconds": 5.122875,
+          "source_float32_sha256": "8e9602dcf96f1504ae7c86d3004c3d66b2569a8b8581988b7bcebff4962953ee"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 173,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 64573,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000243/final_checkpoint.pt",
+            "sha256": "19abade28beff5397f14b44a78a47121335482d1114f3ce73af39e89c9ac8daa",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 24000,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000243/final_checkpoint.pt",
+            "sha256": "c2e7111678e9142a29fe8d9a44678dabb250691082b89417f78cfc63b66dc51c",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 15247,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 10,
+      "title": "Creswell Crags · outside",
+      "job": "pair_0292",
+      "folder": "pair_000292",
+      "rir_id": "OpenAIR__07_creswell-crags__outside__1_s_mainlevel_r_mainlevel2",
+      "room": "OpenAIR/07_creswell-crags/outside",
+      "speech_id": "2412/153947/2412-153947-0016",
+      "speaker": "2412",
+      "caption_id": "formal_021",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a very short tail. The speech sounds very clear. The voice stands out over reflected sound.",
+      "values": {
+        "reference": {
+          "rt60_s": 0.6805675635091295,
+          "c50_db": 8.514399899108628,
+          "drr_db": -0.5652792709151329,
+          "edt_s": 0.41511622612962074
+        },
+        "raw-clap": {
+          "rt60_s": 1.39883007047138,
+          "c50_db": 3.318022641185119,
+          "drr_db": -3.229380277982848,
+          "edt_s": 1.0773380046538172
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.7121912359411953,
+          "c50_db": 14.235773747478378,
+          "drr_db": 6.249929242945535,
+          "edt_s": 0.3572833556492866
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 4
+      },
+      "room_median_rt60": 0.6743335746647554,
+      "common_listening_gain": 0.598869560264143,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0292_dry.wav",
+          "sha256": "ebbbebe692be6ef14ca2244cf0c7b3923fe03cd68827fbe725e4897a6ca70719",
+          "samples": 82960,
+          "seconds": 5.185,
+          "source_float32_sha256": "8501387430bc0ffc5d892bc6e05825504d56a97dcc34abe34892b74f84349b31"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0292_reference.wav",
+          "sha256": "a502c60d5336bd193b75d7302869ec744290c35ecc4ee4086001fcfc02c53a6a",
+          "samples": 98959,
+          "seconds": 6.1849375,
+          "source_float32_sha256": "7ee2fb8302f6e32ff38c2cceea6880d42433ef288b6b3faa4be663e37654aafb"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0292_raw-clap.wav",
+          "sha256": "1b87cbaefb9e4e8407dc3ed61a61582a5dd8aace93e7f88931c9da0b5648c982",
+          "samples": 107765,
+          "seconds": 6.7353125,
+          "source_float32_sha256": "de41847fbc521ac0440d1a31f84ac98898454fe2585ddcc8afa141b25eb6a060"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0292_reverbalign-512-v1.wav",
+          "sha256": "ac1834152e4897778479e05da944780320cd4375e1b889f228c7fec8f6e6ba4a",
+          "samples": 97359,
+          "seconds": 6.0849375,
+          "source_float32_sha256": "f9559e59d14df2adc53f76bf2e783ed13cb2e5e8098f53be4835bbd87cb1a241"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 192,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 64792,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000292/final_checkpoint.pt",
+            "sha256": "4ff08bcdd82102f54e9e313f1f0877f24a79ce05e3c721a56aa7f48aa30f7c77",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 24806,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000292/final_checkpoint.pt",
+            "sha256": "cc69c9b4c26d84e3bed410e3ce1b9936c5abaf0d1d5e92863ee2090dec3364a9",
+            "completed_updates": 300,
+            "nfft": 32768,
+            "rir_samples": 14400,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 11,
+      "title": "Creswell Crags · outside",
+      "job": "pair_0313",
+      "folder": "pair_000313",
+      "rir_id": "OpenAIR__07_creswell-crags__outside__2_s_mainlevel_r_mouth",
+      "room": "OpenAIR/07_creswell-crags/outside",
+      "speech_id": "2086/149214/2086-149214-0003",
+      "speaker": "2086",
+      "caption_id": "formal_018",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a very short tail. The speech sounds very clear. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 0.5914987013237704,
+          "c50_db": 8.202288896182427,
+          "drr_db": -6.1191406796280825,
+          "edt_s": 0.3736941365933821
+        },
+        "raw-clap": {
+          "rt60_s": 1.0703573993458537,
+          "c50_db": 3.901895026312412,
+          "drr_db": -1.827340757533186,
+          "edt_s": 1.1541005069095713
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.5566446631679951,
+          "c50_db": 14.406111189216627,
+          "drr_db": 5.7686344549188995,
+          "edt_s": 0.4117914989005606
+        }
+      },
+      "matches": {
+        "raw-clap": 0,
+        "reverbalign-512-v1": 3
+      },
+      "room_median_rt60": 0.6743335746647554,
+      "common_listening_gain": 0.6414578775453695,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0313_dry.wav",
+          "sha256": "b8679b05a32039be6d4c0016a17ff17ba68f43d16d8b2f386e29a66d1bf0d504",
+          "samples": 143919,
+          "seconds": 8.9949375,
+          "source_float32_sha256": "d1f317432cb831cc35150a265ec25b8a73cf234edf715d95d6f0af9aaf71482b"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0313_reference.wav",
+          "sha256": "e8323ca8c449c9e2d86e0bfba31ad5a045328342776727beaba6242e251f5404",
+          "samples": 159918,
+          "seconds": 9.994875,
+          "source_float32_sha256": "9b5074f719a0012e2aec49ca88375b4213678324382806c9d251479a62809d17"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0313_raw-clap.wav",
+          "sha256": "eb4b70b4a0f1285b91efce035963303177f5bfc75a7b8689aced0176a10aad3c",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "e9d66b45d32ef61e3331d776ac8cd07171dcad419d0a955ea2bf8f195c7e766c"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0313_reverbalign-512-v1.wav",
+          "sha256": "ccbd18ba068d565c4f7dcf0c9fa19b94d32066f009e1519b16b15137b034e00e",
+          "samples": 155918,
+          "seconds": 9.744875,
+          "source_float32_sha256": "70d8a70cc8b5e411d4655a36edaec3c7b86a4af8fb47254aef01b24b2a8fbe4d"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 183,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 64983,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000313/final_checkpoint.pt",
+            "sha256": "e05f73f40f99f88e71760b4a30a9779a9f54c52bff05f1106c25ff20c71ef66c",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 23068,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000313/final_checkpoint.pt",
+            "sha256": "644eb173f1ca7489bf4ea77d032ec8b1dc69266b40e7667dc39e4eac8808932f",
+            "completed_updates": 300,
+            "nfft": 32768,
+            "rir_samples": 12000,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 12,
+      "title": "Creswell Crags · outside",
+      "job": "pair_0353",
+      "folder": "pair_000353",
+      "rir_id": "OpenAIR__07_creswell-crags__outside__3_s_mainlevel_r_furtherin",
+      "room": "OpenAIR/07_creswell-crags/outside",
+      "speech_id": "2412/153948/2412-153948-0001",
+      "speaker": "2412",
+      "caption_id": "formal_013",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a very short tail. The speech sounds clear. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 0.6680995858203814,
+          "c50_db": 3.7820346188200404,
+          "drr_db": -16.999935839924454,
+          "edt_s": 0.6946094800811967
+        },
+        "raw-clap": {
+          "rt60_s": 1.0386747550981106,
+          "c50_db": 4.865461687887029,
+          "drr_db": -0.7984530429429549,
+          "edt_s": 0.8608524921596726
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.8372754241705748,
+          "c50_db": 3.187639986303124,
+          "drr_db": -5.143459517878778,
+          "edt_s": 0.736697865550098
+        }
+      },
+      "matches": {
+        "raw-clap": 2,
+        "reverbalign-512-v1": 1
+      },
+      "room_median_rt60": 0.6743335746647554,
+      "common_listening_gain": 0.4166042880689888,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0353_dry.wav",
+          "sha256": "7c47e901aac5070f86dd3ed6d9f7dd39ae7d0661bc880d63bea84e53d8939220",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "27887eff7da0dd4ebfd9efa4f277385cb4b3f8c06c32e37a1c827aa33b88a827"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0353_reference.wav",
+          "sha256": "048f54a095876ec8ee21b3c1a2e62e9c90c23e14da2fe742984364d823986189",
+          "samples": 159999,
+          "seconds": 9.9999375,
+          "source_float32_sha256": "5428b3448d58b3c7451677e60c539d8b64e7b53a4a5f3360d9b388fea1706e4f"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0353_raw-clap.wav",
+          "sha256": "b12b1235a9b2e4333f466ed0a9f3feac1adb43e4761c22c858e6d56a45dfc207",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "952b9180e4d8af0e3be605ddf186ba2ed23b0934b6e4e739e9708e4e65197f7b"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0353_reverbalign-512-v1.wav",
+          "sha256": "c6e71c3f0cc4d972720a1025a2f9c9b835d2e5e2ff3a9afd89a32856572d703e",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "3a418d0e09184edbbb2b944a395ec236b976fb2f8a06382eb67e4d07778fd679"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 193,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 65193,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000353/final_checkpoint.pt",
+            "sha256": "08a887d8aaa2d94ec35d8fc1c0b4b9cfd454a70a8475183b39cc8e33cd6aa2cb",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 20800,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000353/final_checkpoint.pt",
+            "sha256": "c6e66d8e38404b7cd631412c6ec1b8b83b7538676d0d5dfe4adcaf9c896f6687",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 17854,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 13,
+      "title": "Gill Heads Mine · site 2",
+      "job": "pair_0364",
+      "folder": "pair_000364",
+      "rir_id": "OpenAIR__14_gill-heads-mine__site2__mine_site2_1way_mono",
+      "room": "OpenAIR/14_gill-heads-mine/site2",
+      "speech_id": "174/50561/174-50561-0000",
+      "speaker": "174",
+      "caption_id": "formal_040",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds clear. The voice stands out over reflected sound.",
+      "values": {
+        "reference": {
+          "rt60_s": 0.9857178283160002,
+          "c50_db": 7.393121498392659,
+          "drr_db": -0.5296165565831145,
+          "edt_s": 0.6136797998275796
+        },
+        "raw-clap": {
+          "rt60_s": 1.1042962474000078,
+          "c50_db": 9.73016590590683,
+          "drr_db": 4.273043544938725,
+          "edt_s": 0.6680285511584407
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.8842967385555092,
+          "c50_db": 9.012115646155726,
+          "drr_db": 5.483071361436051,
+          "edt_s": 0.9530133845248723
+        }
+      },
+      "matches": {
+        "raw-clap": 3,
+        "reverbalign-512-v1": 3
+      },
+      "room_median_rt60": 1.1125636219534627,
+      "common_listening_gain": 0.5254226709983896,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0364_dry.wav",
+          "sha256": "031ab639a31f1ef53f3cd3f100ead0353008c6be7aa98a64259fe30db60e1bb2",
+          "samples": 64320,
+          "seconds": 4.02,
+          "source_float32_sha256": "700ee9dc12b3dc85f989a2bb5333771261f513d19791843951a05dc820fcd25f"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0364_reference.wav",
+          "sha256": "bb470fb1cf5a4ff1f463f4c21a183cc38d1ec9de14c4f5646dfa686d3be442a9",
+          "samples": 144320,
+          "seconds": 9.02,
+          "source_float32_sha256": "f0141feed6cc0e1662687c1fb63669838726d3994684dd7e212cc8f5606951e1"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0364_raw-clap.wav",
+          "sha256": "5ba55ac9189824bf1e146489275df9144974eb336e5beb606f99d715e7107e2f",
+          "samples": 82719,
+          "seconds": 5.1699375,
+          "source_float32_sha256": "14419f02132899da1ca45ba2d59975936640d7cfb2d6866d8681378beb023409"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0364_reverbalign-512-v1.wav",
+          "sha256": "a072d84aa830de343061c2594939a70cee75f9729454fd696cea225bfe50691b",
+          "samples": 82173,
+          "seconds": 5.1358125,
+          "source_float32_sha256": "fc02ce8a4c21422d5eef75c1ee35f18c3c6330e2526c106d31f5351ebcd40a36"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 174,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 65374,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000364/final_checkpoint.pt",
+            "sha256": "a28e7142852480880c2e7b375fd12ce1e297e26dcb5de959116d4cc50845f3fc",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 18400,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000364/final_checkpoint.pt",
+            "sha256": "1470c7eb6710a7301349447bd3f1c15a7e6095d76612f16b8a3ae2044c49bfda",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 17854,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 14,
+      "title": "Gill Heads Mine · site 2",
+      "job": "pair_0395",
+      "folder": "pair_000395",
+      "rir_id": "OpenAIR__14_gill-heads-mine__site2__mine_site2_2way_mono",
+      "room": "OpenAIR/14_gill-heads-mine/site2",
+      "speech_id": "174/50561/174-50561-0008",
+      "speaker": "174",
+      "caption_id": "formal_040",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds clear. The voice stands out over reflected sound.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.2394094155909254,
+          "c50_db": 5.529831227692307,
+          "drr_db": -3.0970244081021887,
+          "edt_s": 0.7733960221324545
+        },
+        "raw-clap": {
+          "rt60_s": 1.3035850860465958,
+          "c50_db": 9.424058337046361,
+          "drr_db": 5.245115229619169,
+          "edt_s": 0.9814976612074413
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.9374545108308432,
+          "c50_db": 6.50094880398564,
+          "drr_db": 3.6694347686344657,
+          "edt_s": 1.1654762436867818
+        }
+      },
+      "matches": {
+        "raw-clap": 3,
+        "reverbalign-512-v1": 4
+      },
+      "room_median_rt60": 1.1125636219534627,
+      "common_listening_gain": 0.605325193439208,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0395_dry.wav",
+          "sha256": "a5a6ec85c0494239e374a88b555bbc7d1deef23cedc852f195e65d6ea4668b90",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "6a2f0dfa41d7adac1212a6e7a43cb08470f75c44b65cb749e3b19c58cee110ed"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0395_reference.wav",
+          "sha256": "72c3650f430f96ebe681bb406f742f002018712d57af099fb8d76cf98814f8f6",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "c7c1b741133f41939b92db013d4241a80e7912e43ede5b73e0e8ce5f8a9c8da0"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0395_raw-clap.wav",
+          "sha256": "6e5dfc607037a40584e10b71dc42b713c80ce8ce48031e4765cd1ae1f961c28f",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "05ccf52230bdcd27222e25dd8fa1034b4743750f9869a2c293efd2cf54eecfcc"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0395_reverbalign-512-v1.wav",
+          "sha256": "cebd7584d7f4bf9254d4e6f7c32db8ee63f23ce166f4a7578749f5a04673efb7",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "46f95c5f4115f028db8937f9e1b43314920f58fca31f633a2ba0e68c5e7f85ab"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 175,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 65575,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000395/final_checkpoint.pt",
+            "sha256": "15a1fde8bf94a559d7a813b30ff7ea2c640ba039a1e7234d2d329ba51ff5fddf",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 22400,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000395/final_checkpoint.pt",
+            "sha256": "bfa81c9cd15829b4d9685773bf1feca9d722925e6fc9ee2a0ad74243cc2c922d",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 17854,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 15,
+      "title": "Hoffmann lime kiln",
+      "job": "pair_0434",
+      "folder": "pair_000434",
+      "rir_id": "OpenAIR__17_hoffmann-lime-kiln-langcliffeuk__ir_p1",
+      "room": "OpenAIR/17_hoffmann-lime-kiln-langcliffeuk",
+      "speech_id": "2086/149214/2086-149214-0004",
+      "speaker": "2086",
+      "caption_id": "formal_036",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a short tail. The speech sounds clear. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.0726954884614817,
+          "c50_db": 5.292859504921308,
+          "drr_db": -13.933110210259844,
+          "edt_s": 0.5038408054075084
+        },
+        "raw-clap": {
+          "rt60_s": 1.0704213099232098,
+          "c50_db": 7.712210008977899,
+          "drr_db": 2.8278358808880544,
+          "edt_s": 0.9378122769700059
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.7251358528656584,
+          "c50_db": 7.634335627403724,
+          "drr_db": 0.6669197670398035,
+          "edt_s": 0.5939441172747855
+        }
+      },
+      "matches": {
+        "raw-clap": 2,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.078050016370009,
+      "common_listening_gain": 0.3297728098466998,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0434_dry.wav",
+          "sha256": "a718681a7443663827d890ec21572cd5d75e12386dfa4ebe916157703059987c",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "6cb1e6c57b21818d06cc6b156fe80a02ef86b5753b39e4d31615b51e3edde62e"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0434_reference.wav",
+          "sha256": "48b20603e04c69db5377996a616da2ba98b2e1fcda126de77c90fe2dc051d633",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "a9826526f194eef111703fbdfa777c81d57ff4a2c84c6b619213e2fbb538366c"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0434_raw-clap.wav",
+          "sha256": "c74fa4f6e7e9636277f881f821e737dbf605928a84e958dfb8f77597916e89cf",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "8dded79bce38e626ce8527f748e3cb4da95dba560a3ca5e59db2b310c9327b43"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0434_reverbalign-512-v1.wav",
+          "sha256": "e3c790b4b5c9b9db6aff1c1e118cde79a8d2c1879fd75e6a43efe1f89b3cbe6f",
+          "samples": 159246,
+          "seconds": 9.952875,
+          "source_float32_sha256": "d95802ba51dbcfd3c651aae2df1d9e410888c988f0bb5f21c5be059aa3c7b089"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 184,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 65984,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000434/final_checkpoint.pt",
+            "sha256": "6e2a30a5c0c01ce6e9d59ed380ab310921660eeb264c80b799f8a3ccc898fa50",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 20461,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000434/final_checkpoint.pt",
+            "sha256": "63beb7452c0ee29bc9c495ddca6a278ec8d3740f18eb025fe1c81f37ee17fe14",
+            "completed_updates": 300,
+            "nfft": 32768,
+            "rir_samples": 15247,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 16,
+      "title": "Hoffmann lime kiln",
+      "job": "pair_0465",
+      "folder": "pair_000465",
+      "rir_id": "OpenAIR__17_hoffmann-lime-kiln-langcliffeuk__ir_p2",
+      "room": "OpenAIR/17_hoffmann-lime-kiln-langcliffeuk",
+      "speech_id": "2086/149220/2086-149220-0008",
+      "speaker": "2086",
+      "caption_id": "formal_036",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a short tail. The speech sounds clear. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.0775218824504174,
+          "c50_db": 4.947634514941058,
+          "drr_db": -17.247179856410163,
+          "edt_s": 0.4690558946151556
+        },
+        "raw-clap": {
+          "rt60_s": 1.1444655299026163,
+          "c50_db": 10.832905873072328,
+          "drr_db": 6.275778729393318,
+          "edt_s": 0.4712129851037936
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.8745026578211724,
+          "c50_db": 6.89603809908904,
+          "drr_db": -0.07884679305618095,
+          "edt_s": 0.6719092169246434
+        }
+      },
+      "matches": {
+        "raw-clap": 2,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.078050016370009,
+      "common_listening_gain": 0.3679544276734717,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0465_dry.wav",
+          "sha256": "786f59401b01495450ea905e584c328dfa02ebdae60e345c6597c627630684ef",
+          "samples": 142240,
+          "seconds": 8.89,
+          "source_float32_sha256": "039169418245d8d588de7f970f0a3402449b135fc4cc3140e70a2fa80657f29f"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0465_reference.wav",
+          "sha256": "cf4e3bdb3b2d2b9fdee63003b1a4fdd8d7231dc3d7693da16421c1e203a3c403",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "049cb8261a13419b316ad46305a62d22cb61157efe0afd90cdfd16914e61a3ea"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0465_raw-clap.wav",
+          "sha256": "202c0f01ad172a6a7d1de427997f71306b787a9fa17a34a235b452dd8430ccd6",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "b29af5cfba8b876abc053b7be3cc7300696d740fac45cf1c76302d1ef2ce2b4b"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0465_reverbalign-512-v1.wav",
+          "sha256": "c7469ee54ee2d3184e5ae2fde43b426c716a8d6ec8c168074ae5aa7d2e33249d",
+          "samples": 159224,
+          "seconds": 9.9515,
+          "source_float32_sha256": "9c2c9ae2b35645c27e51a668f507584309b98af205c79b9a88e03b999e1c5978"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 185,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 66185,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000465/final_checkpoint.pt",
+            "sha256": "5938c9873965eebc4ded36a04cf0f745bedd00bca15fac5c2da69376c85a2226",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 20000,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000465/final_checkpoint.pt",
+            "sha256": "acc5f0e279bba4a24704a6c95cc0a6472db2a791e686e6ba3bfb61b8ba12b292",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 16985,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 17,
+      "title": "Hoffmann lime kiln",
+      "job": "pair_0504",
+      "folder": "pair_000504",
+      "rir_id": "OpenAIR__17_hoffmann-lime-kiln-langcliffeuk__ir_p3",
+      "room": "OpenAIR/17_hoffmann-lime-kiln-langcliffeuk",
+      "speech_id": "2412/153948/2412-153948-0008",
+      "speaker": "2412",
+      "caption_id": "formal_031",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds slightly muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.1966535016155753,
+          "c50_db": 0.3196431789178138,
+          "drr_db": -26.55606557050732,
+          "edt_s": 0.702481587560398
+        },
+        "raw-clap": {
+          "rt60_s": 1.200615657527536,
+          "c50_db": 6.02892419092276,
+          "drr_db": 2.380680667783735,
+          "edt_s": 1.3321152827229028
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.137836920766632,
+          "c50_db": 1.3043140563508038,
+          "drr_db": -10.417682155437976,
+          "edt_s": 0.8322001097999315
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 4
+      },
+      "room_median_rt60": 1.078050016370009,
+      "common_listening_gain": 0.5364631006566528,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0504_dry.wav",
+          "sha256": "ba01ce18776dedb67d15794cc99bed8c3f2a31ee808543866585e5c6efc22c0e",
+          "samples": 93040,
+          "seconds": 5.815,
+          "source_float32_sha256": "43f7c9d5def03dabd53c0cd29ba3c0a7b3fa32949d440c8c8397349bc1770e06"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0504_reference.wav",
+          "sha256": "69d6b4472d3ce34a4b70036acfc3dd6b01feb958ed74ae7fec09aacde4b3125c",
+          "samples": 125039,
+          "seconds": 7.8149375,
+          "source_float32_sha256": "6e4b9c4b334b6f5034cf1e88f42ebff04d52486dfd0445df286c1eb69017e84c"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0504_raw-clap.wav",
+          "sha256": "9b612e35170591bef7a3850712ca1d3a44f4544ea4f300d39835baa35b283e7f",
+          "samples": 116239,
+          "seconds": 7.2649375,
+          "source_float32_sha256": "ed2eb00fdba40d2ce6e068eec6149f1424bf9b58827d4f4f527276f2ecb63898"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0504_reverbalign-512-v1.wav",
+          "sha256": "fd5a395d0da8bcd38918e0f57bb35ca90879762e3e6c176a766560a8191bb65e",
+          "samples": 113500,
+          "seconds": 7.09375,
+          "source_float32_sha256": "6d19a469009da10cee6faa7322e03444a795336575feb6be1186a98a0d283374"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 194,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 66394,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000504/final_checkpoint.pt",
+            "sha256": "e9dc430de38357e849763272f667da3b0d83be078a2c16181792fe86561d005d",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 23200,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000504/final_checkpoint.pt",
+            "sha256": "4b70e38a7b38de7875c81cf6f004a767a4ad207748fe9839c649dda8a9e701af",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 20461,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 18,
+      "title": "Hoffmann lime kiln",
+      "job": "pair_0516",
+      "folder": "pair_000516",
+      "rir_id": "OpenAIR__17_hoffmann-lime-kiln-langcliffeuk__ir_p4",
+      "room": "OpenAIR/17_hoffmann-lime-kiln-langcliffeuk",
+      "speech_id": "174/50561/174-50561-0016",
+      "speaker": "174",
+      "caption_id": "formal_031",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds slightly muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.171882887587465,
+          "c50_db": 3.2864523572201545,
+          "drr_db": -25.220022927969048,
+          "edt_s": 0.6547830646062061
+        },
+        "raw-clap": {
+          "rt60_s": 1.1233927673871014,
+          "c50_db": 6.262566432821568,
+          "drr_db": 2.2503590437087913,
+          "edt_s": 1.2736845037262474
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.1050376529202317,
+          "c50_db": 3.1531622393192373,
+          "drr_db": -2.5056697058175894,
+          "edt_s": 1.0667070565572254
+        }
+      },
+      "matches": {
+        "raw-clap": 2,
+        "reverbalign-512-v1": 3
+      },
+      "room_median_rt60": 1.078050016370009,
+      "common_listening_gain": 0.3871075698852275,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0516_dry.wav",
+          "sha256": "e5e0e63e14a28c8d317eae318e97753983110ebbecd72670ac21f05094a05125",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "6e9fdcf2492dcaac38ea95f471ad1a08fee12d5497191a63cb8f65938e5a7001"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0516_reference.wav",
+          "sha256": "0b010896291722b0f558088696fbf9de191eee88cb13ad309e9e7be0943560c9",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "d5ef4d7f2ea0d8d3d6b7e3413f567f4a763bc476a62042c078477c713bad5202"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0516_raw-clap.wav",
+          "sha256": "26eaefe46d729be20c7f3a3cfa7c99e543fa7ec9dd6d2972a6297d44ea1697cd",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "100c8254681c4408d0dfb747d9e0fa016c97b32393a7deb5e78efb328bed690d"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0516_reverbalign-512-v1.wav",
+          "sha256": "dc801ec9e66ac0bb5d127330eda44d02cd33d4e73588dc571b3f935f6ecaeeb1",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "3f17203a8cc49b1012ab1f7fcc22a811dd0d0f3499b105fb232d4a8eafa9ae8c"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 176,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 66576,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000516/final_checkpoint.pt",
+            "sha256": "ac6314717df809a994c71ae80f00766658d2b7473cbf75850b1909fed695f5ec",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 21330,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000516/final_checkpoint.pt",
+            "sha256": "de2470c7441221f11e300738c6e724d17d905219964e179434703668d7508245",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 20461,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 19,
+      "title": "Hoffmann lime kiln",
+      "job": "pair_0556",
+      "folder": "pair_000556",
+      "rir_id": "OpenAIR__17_hoffmann-lime-kiln-langcliffeuk__ir_p5",
+      "room": "OpenAIR/17_hoffmann-lime-kiln-langcliffeuk",
+      "speech_id": "2086/149220/2086-149220-0011",
+      "speaker": "2086",
+      "caption_id": "formal_036",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a short tail. The speech sounds clear. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.0242928776175426,
+          "c50_db": 5.486065609059821,
+          "drr_db": -18.890074936952395,
+          "edt_s": 0.4367449412463159
+        },
+        "raw-clap": {
+          "rt60_s": 1.2591846386801668,
+          "c50_db": 0.26306857827703817,
+          "drr_db": -5.467624708430447,
+          "edt_s": 1.031419195554118
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 0.9691844036488632,
+          "c50_db": 5.161693486948761,
+          "drr_db": -0.9845947870996437,
+          "edt_s": 0.7148743503935703
+        }
+      },
+      "matches": {
+        "raw-clap": 2,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.078050016370009,
+      "common_listening_gain": 0.37706004380593433,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0556_dry.wav",
+          "sha256": "04ac25e6b94d16b92bb052330b7ca5468b5d00c47df79bbe5214fc508374c8ac",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "da23689ffd2806b122361f5875c606421288fbbf3f04314ff1e6224521f45f80"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0556_reference.wav",
+          "sha256": "ad142545cf68147132ba2e7cc54eada1fbcc8d76dff9ceb5f639aeac0755c4f5",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "b5282d5b51360a2d971aad5d09863b81c380f509f9af450b2982e7332ee3a8eb"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0556_raw-clap.wav",
+          "sha256": "b8b675d3a83653f261ca364d392a6beedae35b4a0e228b9df3e244f6afd91d9f",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "57799a3b2c67134503be1065d9e532f2abbc512485145306dceb76738f63b337"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0556_reverbalign-512-v1.wav",
+          "sha256": "a330ab9654215f4e7f01cc1fb5cc825b1aa1dd75d0afc08e886d41e17a23294d",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "fa4c87c9bd47931709a0ca5c636dd79fe03b46c8e769dcc0e39120c4cd6aafd7"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 186,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 66786,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000556/final_checkpoint.pt",
+            "sha256": "575e0b3d89bae305940db74df684ca79e963814832894f727063ac0fc0304f58",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 22199,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000556/final_checkpoint.pt",
+            "sha256": "45bc591af8b1d058ca5cae387de77ba51d77f3bb5364856d758441a1f5e4375b",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 17600,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 20,
+      "title": "Hoffmann lime kiln",
+      "job": "pair_0595",
+      "folder": "pair_000595",
+      "rir_id": "OpenAIR__17_hoffmann-lime-kiln-langcliffeuk__ir_p6",
+      "room": "OpenAIR/17_hoffmann-lime-kiln-langcliffeuk",
+      "speech_id": "2412/153948/2412-153948-0014",
+      "speaker": "2412",
+      "caption_id": "formal_030",
+      "caption": "A speech recording with reverb that drops off very quickly at first and has a short tail. The speech sounds slightly muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.0785781502896006,
+          "c50_db": 2.775224303866661,
+          "drr_db": -17.551438208930765,
+          "edt_s": 0.5323802988236613
+        },
+        "raw-clap": {
+          "rt60_s": 1.5467737574016573,
+          "c50_db": 0.17293274892505184,
+          "drr_db": -3.939069834615172,
+          "edt_s": 1.213626440668504
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.02405875852574,
+          "c50_db": 3.584055990997289,
+          "drr_db": -5.162060281396022,
+          "edt_s": 0.6654479294096176
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.078050016370009,
+      "common_listening_gain": 0.4450878896345144,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0595_dry.wav",
+          "sha256": "f56294ee21d1de9306ab76caed9aad2cf6b2623295f2a3826bf45513335769ea",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "4c54c0ea6f68670625bec27c4938b7d3a5f770ed513c77dbcf905e4527ff53dd"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0595_reference.wav",
+          "sha256": "aa798bc64c574ea90f7b940d5f114bb52a8c709d030a0dcc253c71beb900f208",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "fbdb19ad6ca46d2c189431edff02b21a4437d07c7145297e1bb10446c80c370c"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0595_raw-clap.wav",
+          "sha256": "5316a54d1bc84f9d6d078dfc5231b0df1bc05bd13d0a3f63f5d26f0c1d20c5bf",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "af0052774aa0f3329e91312b2f43a55b1b8e6bc9db4f84560cb233b1f807a6d5"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0595_reverbalign-512-v1.wav",
+          "sha256": "66b76c8d930cc7096bd0efd109f1fa3f81260008d689f9dc43e70b129c2bc681",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "d61fcdfa5b1c0dc9eb2fce2c371b31f47457dc8c35c74fc8d29d1f92d41dbb8b"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 195,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 66995,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000595/final_checkpoint.pt",
+            "sha256": "cb7edbc3ce71ad81ef7c53334f8e2828873e81f40da24558aa09704428da7ae9",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 27200,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000595/final_checkpoint.pt",
+            "sha256": "475710f1674d043dca588ee8c807ed4694f8def8d47af6b600e7b6712b0b484c",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 20000,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 21,
+      "title": "Dixon Studio Theatre",
+      "job": "pair_0607",
+      "folder": "pair_000607",
+      "rir_id": "OpenAIR__42_dixon-studio-theatre-university-york__r1_rir_bformat",
+      "room": "OpenAIR/42_dixon-studio-theatre-university-york",
+      "speech_id": "174/84280/174-84280-0002",
+      "speaker": "174",
+      "caption_id": "formal_031",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds slightly muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.1040354628834521,
+          "c50_db": 0.19106851382877657,
+          "drr_db": -9.26674455399326,
+          "edt_s": 0.9536236795003179
+        },
+        "raw-clap": {
+          "rt60_s": 1.4199317643700915,
+          "c50_db": 8.697642963521325,
+          "drr_db": 4.224286470084218,
+          "edt_s": 1.1504763307364263
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.2012285751599607,
+          "c50_db": 1.7063477645288716,
+          "drr_db": -4.656802803143034,
+          "edt_s": 1.089512821271031
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 3
+      },
+      "room_median_rt60": 1.1014681043682373,
+      "common_listening_gain": 0.5034566847373833,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0607_dry.wav",
+          "sha256": "ae43ddcc7ddb4a7eced57dd5598481c32a4c1057d2d2f139072146bcbaf8a591",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "3a60d0be90667f37c6731176846673c58eb7f55df3190d29cb3030eb38e8de07"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0607_reference.wav",
+          "sha256": "61514156820a3d0ebed9af0f04b47da4d853dd2be79eb5ec6578ad71e854bdf0",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "de44682fd9d3208057060bfc2aec1eb369e387e106763145b6ad6654790091f6"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0607_raw-clap.wav",
+          "sha256": "758e42d87447afb6e8e037fe0c7dca5eacbb033d9230fa75de1d90c64751c15d",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "9f8879ae34341e390db3864fb5a41648a7050f87517af5969f4edb75afdaf464"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0607_reverbalign-512-v1.wav",
+          "sha256": "9089080e6b9c530f8e75ac776a5b7d86237c0f15356277d2357a3949339abde2",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "2914666d0b2606e91f45795c63059842189230c8cc277ce24a27877a043665e3"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 177,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 67177,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000607/final_checkpoint.pt",
+            "sha256": "0954f65aa79aa0d684ece854b0c179ae0a4a60953d5cd7096fe43cb9baad9925",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 24000,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000607/final_checkpoint.pt",
+            "sha256": "904f6f8996db0ce5fef6eaddb96de2769eeb284c8afe064b8a1d204ad4f24f0b",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 22400,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 22,
+      "title": "Dixon Studio Theatre",
+      "job": "pair_0656",
+      "folder": "pair_000656",
+      "rir_id": "OpenAIR__42_dixon-studio-theatre-university-york__r2_rir_bformat",
+      "room": "OpenAIR/42_dixon-studio-theatre-university-york",
+      "speech_id": "2412/153954/2412-153954-0000",
+      "speaker": "2412",
+      "caption_id": "formal_025",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.1014681043682373,
+          "c50_db": -1.9353714343458503,
+          "drr_db": -13.340584402579939,
+          "edt_s": 0.9798201000401341
+        },
+        "raw-clap": {
+          "rt60_s": 1.3913020144572894,
+          "c50_db": -9.255074773038048,
+          "drr_db": -14.321579618342719,
+          "edt_s": 1.2274584686125924
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.3251371111366819,
+          "c50_db": -1.9304796652103757,
+          "drr_db": -11.491487424463163,
+          "edt_s": 1.098256452301898
+        }
+      },
+      "matches": {
+        "raw-clap": 3,
+        "reverbalign-512-v1": 4
+      },
+      "room_median_rt60": 1.1014681043682373,
+      "common_listening_gain": 0.46829748950188455,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0656_dry.wav",
+          "sha256": "341ddad5864bc00a4ba594553e9cbe28803b9a6392c0dc5449c202b133311205",
+          "samples": 144000,
+          "seconds": 9.0,
+          "source_float32_sha256": "4aeb91cdd0fb8870e015f4d47a137c02e517759fb7c7efb60cd43a660a2c03dc"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0656_reference.wav",
+          "sha256": "949f2e7cd872bd5ca10a60e23d9d5f49d89d94c47c22047adf2d0d005a864fe7",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "d50e2116b0d41875af555fe0d195647f9b9ea577a5b7437b867630adcc3b1cc8"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0656_raw-clap.wav",
+          "sha256": "6d441ecd6b406123dbd1ea3f44506204b03fa0f3c3209d52e8aa809731bbc107",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "72b32a12ef41d58ff6b2c834fe307133b8fa550a51bb285d6fdf62c020d9f822"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0656_reverbalign-512-v1.wav",
+          "sha256": "1b3ef03616977444187ed3c45cb619f63830ff7625fa4cc053859d5a85513913",
+          "samples": 160000,
+          "seconds": 10.0,
+          "source_float32_sha256": "bdaaa5b106dd51ea2c4502f9e859e2abaf3d92a3e3207ca27e5aac1192919d0c"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 196,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 67396,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000656/final_checkpoint.pt",
+            "sha256": "77c8b189e1993946b319d95a9ab79f70673a220369a1cc9bdb3d2d4254dc1e17",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 27200,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000656/final_checkpoint.pt",
+            "sha256": "21386eb66ca1dd88102d05193401457e7a7fce0960207ac5aec50a56bb441054",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 24806,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 23,
+      "title": "Dixon Studio Theatre",
+      "job": "pair_0677",
+      "folder": "pair_000677",
+      "rir_id": "OpenAIR__42_dixon-studio-theatre-university-york__r3_rir_bformat",
+      "room": "OpenAIR/42_dixon-studio-theatre-university-york",
+      "speech_id": "2086/149220/2086-149220-0018",
+      "speaker": "2086",
+      "caption_id": "formal_025",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.1073211480402931,
+          "c50_db": -1.478947072607236,
+          "drr_db": -14.002736390646222,
+          "edt_s": 0.9532803675837099
+        },
+        "raw-clap": {
+          "rt60_s": 1.1273033389238765,
+          "c50_db": 1.5946068790565004,
+          "drr_db": -4.403929694262179,
+          "edt_s": 1.2740108177953642
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.1162671140455742,
+          "c50_db": 1.964021805066332,
+          "drr_db": -4.29023088083391,
+          "edt_s": 0.960630965914529
+        }
+      },
+      "matches": {
+        "raw-clap": 2,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.1014681043682373,
+      "common_listening_gain": 0.4616626692324706,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0677_dry.wav",
+          "sha256": "82c4390705397628ce6a6ef38da42a9e45a4dc30c13bbea6de41a8ab9e064cf9",
+          "samples": 109280,
+          "seconds": 6.83,
+          "source_float32_sha256": "4c686e236c9b134b07daced0b37cd89dc73a98344609b81227b9d5dfa8e79e0b"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0677_reference.wav",
+          "sha256": "32ea7351f40bc61c799df93b30f48d6e08f536ab9bd89ee3c9bbeb42f6e60bbc",
+          "samples": 157279,
+          "seconds": 9.8299375,
+          "source_float32_sha256": "5753486f16e1e8c720abf2e8f7f01629a48a133138942e4fc55e311440f17187"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0677_raw-clap.wav",
+          "sha256": "e4d83dc807553072cca94d04dd5679895a3d873efc64255d6de45e2643381ed2",
+          "samples": 131679,
+          "seconds": 8.2299375,
+          "source_float32_sha256": "a06aa5277c91875bbb4194fb1f1cb4cc4df778f0e7f5b59628b616036e5132d5"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0677_reverbalign-512-v1.wav",
+          "sha256": "f93c3455f3491a5c32c240e3496bce97f64f0063b36a287817159a7ce8d821f6",
+          "samples": 130609,
+          "seconds": 8.1630625,
+          "source_float32_sha256": "ada1848783d7bc6f33395da4593bdc80a288fe3ad60d33a38490ce94365c88d4"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 187,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 67587,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000677/final_checkpoint.pt",
+            "sha256": "7cb32f0b87b784c0d0d401800573c632e7c831127fb931c34443be3427f48148",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 22400,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000677/final_checkpoint.pt",
+            "sha256": "b522fae8f6b4cfd72e0487c5026aec9e9b08d931f0f9588d7345d3c4faf3c25e",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 21330,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 24,
+      "title": "Dixon Studio Theatre",
+      "job": "pair_0717",
+      "folder": "pair_000717",
+      "rir_id": "OpenAIR__42_dixon-studio-theatre-university-york__r4_rir_bformat",
+      "room": "OpenAIR/42_dixon-studio-theatre-university-york",
+      "speech_id": "2412/153954/2412-153954-0002",
+      "speaker": "2412",
+      "caption_id": "formal_031",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds slightly muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.0953996642494073,
+          "c50_db": 0.8796921694692441,
+          "drr_db": -7.0331179632234475,
+          "edt_s": 0.980191666866225
+        },
+        "raw-clap": {
+          "rt60_s": 1.5212149215463002,
+          "c50_db": 8.56391298436326,
+          "drr_db": 6.226881875098394,
+          "edt_s": 1.8705536810023955
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.0195554795332544,
+          "c50_db": 5.87885452633847,
+          "drr_db": -0.43116504819286594,
+          "edt_s": 0.9532432835081267
+        }
+      },
+      "matches": {
+        "raw-clap": 0,
+        "reverbalign-512-v1": 2
+      },
+      "room_median_rt60": 1.1014681043682373,
+      "common_listening_gain": 0.7737048354163869,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0717_dry.wav",
+          "sha256": "f055a73beda59b6035271cbb541534ce6a202d009110bc51b85c09a1500331f1",
+          "samples": 64880,
+          "seconds": 4.055,
+          "source_float32_sha256": "dc0badf45b8cbbcd29d32132f840694ecdd01892c9e0e62a8207ddf8632fc82f"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0717_reference.wav",
+          "sha256": "147fe58c448dbda4adeae72e6d83558fdeaa3f00acad18cb2163304218c6588e",
+          "samples": 112879,
+          "seconds": 7.0549375,
+          "source_float32_sha256": "13fb32be2fb4f884d29f3dc5a6842a6a93770afd05817c73eb3059e9e473b453"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0717_raw-clap.wav",
+          "sha256": "c8e9940c4658d1b91e28af3f6629343aa07171aa7ca9abf1ad85178a482aa49e",
+          "samples": 89685,
+          "seconds": 5.6053125,
+          "source_float32_sha256": "64630bd0f3ff4a563c90ff64540c9d9bed11153ab569a00d2eceb23182954ad2"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0717_reverbalign-512-v1.wav",
+          "sha256": "115dec00d1701e5021735adba0f048ffcb18c618f69c7f29905e15989c2efa32",
+          "samples": 84079,
+          "seconds": 5.2549375,
+          "source_float32_sha256": "a257c098603e9aaa9a4ca4938bf8a36506303f264dcb464eca3d3df7a1ebbbb4"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 197,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 67797,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000717/final_checkpoint.pt",
+            "sha256": "f888b7df85113136cff59cd2c06b0367b52681a09aa166e73a4c4c6999fe4449",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 24806,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000717/final_checkpoint.pt",
+            "sha256": "b90585625d2729762c305bd42a6a6c0495592a8d2e0f5dd2969400d83cd011bd",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 19200,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 25,
+      "title": "Dixon Studio Theatre",
+      "job": "pair_0728",
+      "folder": "pair_000728",
+      "rir_id": "OpenAIR__42_dixon-studio-theatre-university-york__r5_rir_bformat",
+      "room": "OpenAIR/42_dixon-studio-theatre-university-york",
+      "speech_id": "174/84280/174-84280-0010",
+      "speaker": "174",
+      "caption_id": "formal_031",
+      "caption": "A speech recording with reverb that drops off quickly at first and has a short tail. The speech sounds slightly muddy. The reflected sound is prominent relative to the voice.",
+      "values": {
+        "reference": {
+          "rt60_s": 1.0687535985504646,
+          "c50_db": 0.04034661590896566,
+          "drr_db": -9.72007283502947,
+          "edt_s": 0.9825282706011065
+        },
+        "raw-clap": {
+          "rt60_s": 1.2397940785787354,
+          "c50_db": -2.7952222494185417,
+          "drr_db": -5.232000820399741,
+          "edt_s": 1.3872059201218838
+        },
+        "reverbalign-512-v1": {
+          "rt60_s": 1.0031440581169933,
+          "c50_db": 3.1848915948029473,
+          "drr_db": -2.3134596950532607,
+          "edt_s": 0.9409474751481148
+        }
+      },
+      "matches": {
+        "raw-clap": 1,
+        "reverbalign-512-v1": 3
+      },
+      "room_median_rt60": 1.1014681043682373,
+      "common_listening_gain": 0.6073135103630417,
+      "audio": {
+        "dry": {
+          "path": "assets/audio/pair_0728_dry.wav",
+          "sha256": "a8d40b1b10cbcdc4542564c3e97959690da1b48592eb1d4dd30790b98b5ccecc",
+          "samples": 69760,
+          "seconds": 4.36,
+          "source_float32_sha256": "1595d84ae3f21a26ef5642f22966cd6a540749f8d50f2733bc5923e10e1337bf"
+        },
+        "reference": {
+          "path": "assets/audio/pair_0728_reference.wav",
+          "sha256": "2e8631eaf4a1222bb31afb94ccef7239bf557eae462ecf32b0b66092c98d0071",
+          "samples": 117759,
+          "seconds": 7.3599375,
+          "source_float32_sha256": "c6dc719466e63d5528d0347bd2f5793fd513cb65f5eba4fb6852fdf52c01ee12"
+        },
+        "raw-clap": {
+          "path": "assets/audio/pair_0728_raw-clap.wav",
+          "sha256": "5bd792d67a4847d33da85e3b6469aa17d1e0c3ade96e0ae88203e80d4ec7585a",
+          "samples": 97172,
+          "seconds": 6.07325,
+          "source_float32_sha256": "31df6c4d8231a40a9401e4b78bf910baed13c6fb80d050af277ad1803c4c1fbb"
+        },
+        "reverbalign-512-v1": {
+          "path": "assets/audio/pair_0728_reverbalign-512-v1.wav",
+          "sha256": "562902965f32d77629d9cd67e4e44a09234ba5f6fad015f917fc22fc96b3d9a5",
+          "samples": 89759,
+          "seconds": 5.6099375,
+          "source_float32_sha256": "3573bacaa2596dcd857f363b2cc9e0ea2e68782f6cd9e0a50ff4f490d2ea9e23"
+        }
+      },
+      "source": {
+        "dry_h5": "experiments/00_embeddings_comparison/dry_200.h5",
+        "dry_row": 178,
+        "reference_h5": "experiments/00_embeddings_comparison/convolution_200.h5",
+        "reference_row": 67978,
+        "reference_policy": "Exact stored measured-RIR convolution; full then truncate to 10s.",
+        "checkpoints": {
+          "raw-clap": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]raw-clap/pair_000728/final_checkpoint.pt",
+            "sha256": "bc9075b9274c4316ad2f94a55c130f8150064161f4c72584fe093567a31a0370",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 27413,
+            "metrics_reconstruction_verified": true
+          },
+          "reverbalign-512-v1": {
+            "checkpoint": "experiments/07_fdn_text_optimization/results/[gpu]reverbalign-512-v1/pair_000728/final_checkpoint.pt",
+            "sha256": "35416824e9d4b98b1ac77e3a009fab35dcc5a3951f59540eefe1dc36d1283736",
+            "completed_updates": 300,
+            "nfft": 65536,
+            "rir_samples": 20000,
+            "metrics_reconstruction_verified": true
+          }
+        }
+      }
+    }
+  ],
+  "sources": {
+    "paper/main.tex": "77fbfd2819566e7a1bcd4abcac94e6b7aeef61a6bc81cd20d570a252385fcbfb",
+    "configs/adapter_pairs/reverbalign_512_v1.json": "620b6184103a7e2d4b03438fc1eb5b5f867b984ba86b4f86276a56166d43723e",
+    "experiments/07_fdn_text_optimization/results/gpu_three_model_physical_comparison/per_pair_metrics.csv": "9e4830782ef10b4142faea82514a6967bbf765e58ad28ed822f6eed6018f2d49",
+    "experiments/07_fdn_text_optimization/results/gpu_three_model_physical_comparison/summary.csv": "56cd3c601370c6bbff06742a9bd6baa80e8e5a2f3d1bdafd942e811ab70c9982",
+    "experiments/07_fdn_text_optimization/results/gpu_three_model_physical_comparison/joint_match_summary.csv": "28d374fd4f425a204435f09fd9a4b8472e46f4b0f9a21c6909c3feff91dafbeb",
+    "experiments/07_fdn_text_optimization/results/gpu_three_model_physical_comparison/audit.json": "fda8d9c464f78bd3f933a3e522823820037cd723f95c254a0a59270ae91ffa40",
+    "experiments/07_fdn_text_optimization/results/gpu_three_model_physical_comparison/source_verification.json": "9d334d74ac228eadb23b9f8e2527535a6595a89464fbe328cf877e01fa001121",
+    "experiments/07_fdn_text_optimization/evaluate_gpu_checkpoints.py": "24344a276ffc69c93ff012af1c8c3eb822c45dd9b834fd080ebf8f201fc54030",
+    "output/pdf/figure1_representation_geometry.svg": "639bc6cf42abc2290328c03568042bb845a435e68419b3ef964d329fe918bce4"
+  },
+  "figure_centroids_displayed": false
+}

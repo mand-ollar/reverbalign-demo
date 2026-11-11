@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-11",
+  "status": "passed",
+  "examples": 25,
+  "unique_utterances": 25,
+  "unique_rirs": 25,
+  "wavs": 100,
+  "portable_copy_test": {
+    "served_from": "a relocated folder outside the research repository",
+    "port": 8766,
+    "standalone_verifier": "passed",
+    "page_checks": [
+      {
+        "range": "1\u20135",
+        "ready": 20,
+        "errors": 0
+      },
+      {
+        "range": "6\u201310",
+        "ready": 20,
+        "errors": 0
+      },
+      {
+        "range": "11\u201315",
+        "ready": 20,
+        "errors": 0
+      },
+      {
+        "range": "16\u201320",
+        "ready": 20,
+        "errors": 0
+      },
+      {
+        "range": "21\u201325",
+        "ready": 20,
+        "errors": 0
+      }
+    ],
+    "actual_playback": "pair_0607 reverbalign-512-v1; playback time advanced",
+    "all_audio_requests_from_copy_server": true
+  },
+  "main_preview": "http://127.0.0.1:8765/#top; original preview server kept running",
+  "mobile": {
+    "width": 390,
+    "horizontal_overflow": false,
+    "ready_tracks": 20
+  },
+  "screenshots": [
+    "desktop.jpg",
+    "mobile.jpg"
+  ],
+  "space_filter": {
+    "type": "wrapping buttons with aria-pressed",
+    "button_count": 7,
+    "checks": [
+      "selected space has one active state",
+      "Hoffmann: six examples across two pages",
+      "Gill Heads Mine: keyboard Enter selects two examples",
+      "All spaces restores twenty-five examples",
+      "390px mobile width has no horizontal overflow"
+    ],
+    "screenshot": "space-filter.jpg"
+  }
+}

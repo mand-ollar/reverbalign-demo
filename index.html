@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ReverbAlign audio examples: matched dry speech, Raw CLAP, ReverbAlign-512-v1, and measured-RIR references.">
+  <meta name="theme-color" content="#245a50">
+  <title>ReverbAlign — Audio examples</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data/demo-data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#listening">Skip to audio examples</a>
+  <main class="page" id="top">
+    <header class="paper-header">
+      <p class="kicker">Paper companion · Audio examples</p>
+      <h1>ReverbAlign</h1>
+      <p class="paper-title">Text-Guided Reverberation Control with a Speech-Debiased CLAP Geometry</p>
+      <p class="authors">Minseok Oh · Kirak Kim · Sungyoung Kim <span>— AIRIS Lab, KAIST</span></p>
+      <p class="intro">Compare the same speech and acoustic caption with <strong>Raw CLAP</strong> and <strong>ReverbAlign-512-v1</strong>. Reference tracks use measured RIRs and are provided for evaluation only.</p>
+    </header>
+
+    <details class="support" id="results">
+      <summary>Full test-set results &amp; representation <span>750 matched pairs</span></summary>
+      <div class="support-body">
+        <p>25 held-out RIRs × 30 utterances, from three speakers. Both methods use the same caption, dry input, initialization, and 300 FDN updates. Hamilton’s approximately 16-second RIR is excluded.</p>
+        <div class="table-scroll"><table class="results-table"><caption>Full test-set acoustic accuracy</caption><thead><tr><th rowspan="2" scope="col">Attribute</th><th colspan="2" scope="colgroup">MAE ↓</th><th colspan="2" scope="colgroup">Region agreement ↑</th></tr><tr><th scope="col">Raw CLAP</th><th scope="col">ReverbAlign</th><th scope="col">Raw CLAP</th><th scope="col">ReverbAlign</th></tr></thead><tbody id="summary-body"></tbody></table></div>
+        <p id="joint-results" class="joint-results"></p>
+        <p>MAE measures proximity to the reference RIR; region agreement tests the caption’s training-quantile interval. DRR remains a limitation: ReverbAlign’s mean signed error is +9.27 dB.</p>
+        <figure id="geometry"><a href="assets/figures/representation.svg" target="_blank" rel="noopener"><img src="assets/figures/representation.svg" loading="lazy" width="1000" height="506" alt="Latest Raw CLAP vs ReverbAlign UMAP and cosine-distance ECDF for 750 test embeddings, with RIR colors and three speaker marker shapes; no centroids."></a><figcaption>Latest Raw CLAP vs ReverbAlign representation. UMAP is qualitative; distances are measured in the original 512D spaces. No centroids are displayed.</figcaption></figure>
+        <p class="data-links"><a href="data/summary.csv" download>Summary CSV</a><a href="data/per_pair_metrics.csv" download>All 750 matched pairs</a><a href="data/figure1_representation_geometry_provenance.json">Figure provenance</a></p>
+      </div>
+    </details>
+
+    <section id="listening" aria-labelledby="listen-title">
+      <div class="listen-heading"><h2 id="listen-title">Audio examples <span id="total-count">25</span></h2><span class="scope-note">25 RIRs · 25 different utterances · 3 speakers</span></div>
+      <p class="playback-note">Five cases per page. One track plays at a time. Each case shares one gain across all four tracks, preserving relative levels.</p>
+      <details class="support selection" id="protocol"><summary>Sample selection &amp; playback notes</summary><div class="support-body">
+        <p><strong>Selection.</strong> Every one of the 25 test RIRs appears once, paired with a different test utterance. Speakers 174, 2086, and 2412 have 9, 8, and 8 cases. The previous speaker-to-RIR assignment is retained: room-median RT60 anchors receive speakers in rotation, and other RIRs balance the speaker counts. In room-ID and RIR-ID order, each case takes that speaker’s next unused utterance in lexicographic ID order, starting with the first. No model scores or listening preferences are used.</p>
+        <p><strong>Scope.</strong> The demo contains 25 distinct RIRs and 25 distinct utterances selected from the 30 test utterances. Quantitative results above still use all 750 pairs. Captions use the fixed 96-combination template (4 RT60 × 4 C50 × 2 DRR × 3 EDT). The model is ReverbAlign-512-v1; Legacy-Best, free-form text, and four-level DRR experiments are excluded.</p>
+        <p><strong>Audio.</strong> Offline renders of saved final 300-update FDN checkpoints, with no additional optimization or CLAP inference. RIRs are L2-normalized, convolved with the stored dry speech, and capped at 10 s. Reference tracks are the corresponding stored measured-RIR convolutions. A shared gain per case limits peak level to 0.95; there is no individual loudness normalization. Files are mono 16-kHz PCM16. The four RIR measurements are verified against the saved results. Reference audio and RIR measurements never enter the optimization objective.</p>
+        <div id="bucket-table"></div>
+        <p class="small">Caption cut points are fitted to unique training RIRs. Boundary values enter the upper interval. DRR phrases denote relative training quantiles. RT60 uses T30/T20; C50 uses a 50-ms split; DRR uses a [−1, 2.5] ms direct window; EDT uses the initial 0 to −10 dB decay. Generated RIRs stop at the −60 dB trailing-energy threshold or 6 s.</p>
+        <p><a href="data/manifest.json" download>Full case manifest, source paths &amp; file hashes</a></p>
+      </div></details>
+      <div class="toolbar">
+        <div class="toolbar-top"><div class="filter-heading"><span class="filter-label" id="space-label">Space</span><span id="case-count" role="status" aria-live="polite">25 examples</span></div><label class="sync-option"><input type="checkbox" id="sync-position"> Keep playback position within a case</label></div>
+        <div class="space-filters" id="room-filter" role="group" aria-labelledby="space-label"><button type="button" data-room="all" aria-pressed="true">All spaces</button></div>
+      </div>
+      <div class="pagination" aria-label="Sample pages"><button id="previous-page" type="button">← Previous</button><span id="page-label" role="status" aria-live="polite"></span><button id="next-page" type="button">Next →</button></div>
+      <noscript><p>Enable JavaScript to display the saved examples, or open the WAV files in assets/audio.</p></noscript>
+      <div id="examples"></div>
+    </section>
+    <footer><span>ReverbAlign-512-v1 · Saved experimental results</span><a href="#top">Back to top ↑</a></footer>
+  </main>
+</body>
+</html>

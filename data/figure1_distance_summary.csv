@@ -1,0 +1,7 @@
+model,condition,pairs,mean,median
+Raw CLAP,same_rir_different_speech,10875,0.19206,0.184484
+Raw CLAP,different_rir_same_speech,9000,0.112876,0.110233
+Raw CLAP,different_rir_different_speech,261000,0.250816,0.242721
+ReverbAlign,same_rir_different_speech,10875,0.011968,0.008166
+ReverbAlign,different_rir_same_speech,9000,0.07834,0.055595
+ReverbAlign,different_rir_different_speech,261000,0.081421,0.059128

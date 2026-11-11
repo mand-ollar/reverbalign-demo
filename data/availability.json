@@ -1,0 +1,8 @@
+{
+  "current_result_pairs_per_model": 750,
+  "current_result_format": "final/initial/best FDN checkpoints and history; no pre-existing WAVs",
+  "exported_cases": 25,
+  "exported_listening_wavs": 100,
+  "reference_available": true,
+  "historical_wavs": "Available under test_full_* and single-case experiment folders; excluded because they are not the current matched CUDA ReverbAlign-512-v1 comparison."
+}

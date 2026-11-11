@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "cases": 25,
+  "wavs": 100,
+  "evaluated_pairs_per_model": 750,
+  "checked": [
+    "source hashes preserved",
+    "checkpoint hashes and final update=300",
+    "WAV hashes, PCM16, 16kHz, mono, finite and peak-safe",
+    "dry/reference HDF5 row identity and PCM export fidelity",
+    "MAE, per-attribute region agreement and joint counts recomputed",
+    "25 distinct test RIRs and 25 distinct test utterances, six spaces, three speakers, Hamilton excluded",
+    "centroid-free latest figure"
+  ]
+}

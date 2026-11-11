@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "self_contained": true,
+  "examples": 25,
+  "unique_utterances": 25,
+  "unique_rirs": 25,
+  "wavs": 100,
+  "speaker_counts": {
+    "174": 9,
+    "2086": 8,
+    "2412": 8
+  },
+  "checks": [
+    "all HTML/CSS/audio asset paths resolve inside the demo folder",
+    "no symlinks or external static dependencies",
+    "all WAV hashes, formats and sample counts",
+    "25 different utterances and all 25 RIRs",
+    "case metadata and RIR metrics match bundled CSV",
+    "bundled full-test MAE recomputed",
+    "latest representation SVG hash"
+  ],
+  "dependencies": "Python standard library only; original repository not accessed"
+}
