@@ -7,7 +7,6 @@
   "wavs": 100,
   "portable_copy_test": {
     "served_from": "a relocated folder outside the research repository",
-    "port": 8766,
     "standalone_verifier": "passed",
     "page_checks": [
       {
@@ -39,7 +38,6 @@
     "actual_playback": "pair_0607 reverbalign-512-v1; playback time advanced",
     "all_audio_requests_from_copy_server": true
   },
-  "main_preview": "http://127.0.0.1:8765/#top; original preview server kept running",
   "mobile": {
     "width": 390,
     "horizontal_overflow": false,
